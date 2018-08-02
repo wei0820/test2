@@ -1,0 +1,133 @@
+//
+//  TableViewController.swift
+//  test2
+//
+//  Created by ADUP05 on 2018/8/1.
+//  Copyright © 2018年 ADUP05. All rights reserved.
+//
+
+import UIKit
+
+class TableViewController: UITableViewController {
+    var array = ["A","B","C","D","E","F"]
+    var message = ["It is A","It is B","It is C","It is D","It is E","It is F"]
+    var imges = ["icphoto","bace","facebook","good","home","instagram"]
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return array.count
+    }
+
+   
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellin = "cell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellin, for: indexPath) as! CollectionViewCell
+        cell.namelabel.text = array[indexPath.row]
+        cell.img.image = UIImage(named: imges[indexPath.row])
+    
+        return cell
+    }
+ 
+
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    */
+
+    /*
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }    
+    }
+    */
+
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+
+    }
+    */
+
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
+    */
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let openMenu = UIAlertController(title: "what are you doing ", message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        openMenu.addAction(cancelAction)
+        let cancelHandler = {
+            (action:UIAlertAction!)->Void in
+            let alertmessage = UIAlertController(title: "hello", message: "hell message", preferredStyle: .alert)
+            alertmessage.addAction(UIAlertAction(title: "actionTitle", style: .default ,handler: nil))
+            self.present(alertmessage, animated: true, completion: nil)
+        }
+        
+        
+        
+        let checkAction  = UIAlertAction(title: "check ", style: .default) { (action:UIAlertAction!) in
+            let cell = tableView.cellForRow(at: indexPath)
+
+            if(indexPath.row == 0){
+                cell?.accessoryType = .disclosureIndicator
+
+            }else if (indexPath.row == 1){
+                cell?.accessoryType = .detailButton
+
+            }else if (indexPath.row == 2){
+                cell?.accessoryType = .checkmark
+
+                
+            }else{
+                cell?.accessoryType = .detailDisclosureButton
+
+            }
+
+
+        }
+        openMenu.addAction(checkAction)
+        
+        let alertAction = UIAlertAction(title: "call me", style: .default, handler: cancelHandler)
+        openMenu.addAction(alertAction)
+        present(openMenu, animated: true, completion: nil)
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+
+}
