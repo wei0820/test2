@@ -90,19 +90,19 @@ class TableViewController: UITableViewController {
     }
     */
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let openMenu = UIAlertController(title: "what are you doing ", message: nil, preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        let openMenu = UIAlertController(title: "Select item ", message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         openMenu.addAction(cancelAction)
         let cancelHandler = {
             (action:UIAlertAction!)->Void in
-            let alertmessage = UIAlertController(title: "hello", message: "hell message", preferredStyle: .alert)
-            alertmessage.addAction(UIAlertAction(title: "actionTitle", style: .default ,handler: nil))
+            let alertmessage = UIAlertController(title: "標題", message: "這裡是內容！！", preferredStyle: .alert)
+            alertmessage.addAction(UIAlertAction(title: "取消", style: .default ,handler: nil))
             self.present(alertmessage, animated: true, completion: nil)
         }
         
         
         
-        let checkAction  = UIAlertAction(title: "check ", style: .default) { (action:UIAlertAction!) in
+        let checkAction  = UIAlertAction(title: "打卡 ", style: .default) { (action:UIAlertAction!) in
             let cell = tableView.cellForRow(at: indexPath)
 
             if(indexPath.row == 0){
@@ -124,7 +124,7 @@ class TableViewController: UITableViewController {
         }
         openMenu.addAction(checkAction)
         
-        let alertAction = UIAlertAction(title: "call me", style: .default, handler: cancelHandler)
+        let alertAction = UIAlertAction(title: "按我", style: .default, handler: cancelHandler)
         openMenu.addAction(alertAction)
         present(openMenu, animated: true, completion: nil)
         tableView.deselectRow(at: indexPath, animated: false)
