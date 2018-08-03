@@ -12,6 +12,7 @@ class TableViewController: UITableViewController {
     var array = ["A","B","C","D","E","F"]
     var message = ["It is A","It is B","It is C","It is D","It is E","It is F"]
     var imges = ["icphoto","bace","facebook","good","home","instagram"]
+    var checkBool = Array(repeating: false, count: 6)
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,11 +41,20 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellin, for: indexPath) as! CollectionViewCell
         cell.namelabel.text = array[indexPath.row]
         cell.img.image = UIImage(named: imges[indexPath.row])
+        
+        if checkBool[indexPath.row]{
+            cell.accessoryType = .checkmark
+
+        } else{
+            cell.accessoryType = .none
+        }
+        
+        
     
         return cell
     }
  
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -101,24 +111,40 @@ class TableViewController: UITableViewController {
         }
         
         
-        
-        let checkAction  = UIAlertAction(title: "打卡 ", style: .default) { (action:UIAlertAction!) in
+        var mTitle = "打卡 "
+        if(self.checkBool[indexPath.row] == true){
+           mTitle = "取消打卡"
+        }else{
+            var mTitle = "打卡 "
+
+        }
+
+        let checkAction  = UIAlertAction(title: mTitle, style: .default) { (action:UIAlertAction!) in
             let cell = tableView.cellForRow(at: indexPath)
-
-            if(indexPath.row == 0){
-                cell?.accessoryType = .disclosureIndicator
-
-            }else if (indexPath.row == 1){
-                cell?.accessoryType = .detailButton
-
-            }else if (indexPath.row == 2){
-                cell?.accessoryType = .checkmark
-
-                
+            
+            
+            if(self.checkBool[indexPath.row] == true){
+                cell?.accessoryType = .none
+                self.checkBool[indexPath.row] = true
             }else{
-                cell?.accessoryType = .detailDisclosureButton
-
+                self.checkBool[indexPath.row] = false
+                 cell?.accessoryType = .checkmark
             }
+//            if(indexPath.row == 0){
+//                cell?.accessoryType = .checkmark
+//                self.checkBool[indexPath.row] = true
+//
+//            }else if (indexPath.row == 1){
+//                cell?.accessoryType = .detailButton
+//
+//            }else if (indexPath.row == 2){
+//                cell?.accessoryType = .checkmark
+//
+//
+//            }else{
+//                cell?.accessoryType = .detailDisclosureButton
+//
+//            }
 
 
         }
