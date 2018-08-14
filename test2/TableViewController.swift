@@ -62,18 +62,45 @@ class TableViewController: UITableViewController {
         return true
     }
     */
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//                if editingStyle == .delete {
+//                    // Delete the row from the data source
+//                    tableView.deleteRows(at: [indexPath], with: .fade)
+//                } else if editingStyle == .insert {
+//                    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//                }
+//    }
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let de = UIContextualAction(style: .destructive, title: "delete") { (action, view, deletebool) in
+
+            self.array.remove(at: indexPath.row)
+            self.message.remove(at: indexPath.row)
+            self.imges.remove(at: indexPath.row)
+            
+            self.tableView.deleteRows(at: [indexPath], with:.fade)
+            
+            deletebool(true)
+        
+        }
+        let share = UIContextualAction(style: .normal, title: "share") { (action, view, bool) in
+            let view =  UIActivityViewController(activityItems: ["SHARE"], applicationActivities: nil)
+            self.present(view, animated: true, completion: nil)
+            bool(true)
+        }
+        return UISwipeActionsConfiguration(actions: [share,de])
     }
-    */
+    
+//    // Override to support editing the table view.
+//    override func tableView(_ tableView: UITableView, commit editingStyle:, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            // Delete the row from the data source
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        } else if editingStyle == .insert {
+//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//        }
+//    }
+ 
 
     /*
     // Override to support rearranging the table view.
