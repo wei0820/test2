@@ -84,7 +84,9 @@ class TableViewController: UITableViewController {
         
         }
         let share = UIContextualAction(style: .normal, title: "share") { (action, view, bool) in
-            let view =  UIActivityViewController(activityItems: ["SHARE"], applicationActivities: nil)
+            
+            let img  = UIImage(named: self.imges[indexPath.row])
+            let view =  UIActivityViewController(activityItems: ["SHARE",img], applicationActivities: nil)
             self.present(view, animated: true, completion: nil)
             bool(true)
         }
