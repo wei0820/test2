@@ -9,10 +9,11 @@
 import UIKit
 
 class ResViewController: UIViewController {
-
+    @IBOutlet var resImg :UIImageView!
+    var resName = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        resImg.image = UIImage(named: "good")
         // Do any additional setup after loading the view.
     }
     
