@@ -117,6 +117,8 @@ class ViewController: UIViewController ,GADBannerViewDelegate,UITableViewDelegat
             ])
     }
    
+    
+    
     @IBAction func closeView(b :UIButton){
         
         self.dismiss(animated: true, completion: nil)
