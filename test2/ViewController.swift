@@ -121,5 +121,4 @@ class ViewController: UIViewController ,GADBannerViewDelegate,UITableViewDelegat
         
         self.dismiss(animated: true, completion: nil)
     }
-
 }
